@@ -1,0 +1,27 @@
+# Build output: build.ps1 writes to dist\ by default; binaries are published
+# as GitHub release assets, not committed.
+/bin/
+/dist/
+
+# cgo header generated next to the DLL
+*.h
+!/tsp/shim.h
+
+# Local configuration, registry and logs from running the provider or
+# amitsp-ctl out of the working tree
+ami-tsp.json
+lines.json
+*.log
+*.log.[0-9]
+
+# Go test and profiling output
+*.test
+*.out
+coverage.*
+
+# Editors and OS
+.vscode/
+.idea/
+*.swp
+Thumbs.db
+Desktop.ini

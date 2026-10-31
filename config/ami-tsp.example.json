@@ -1,0 +1,71 @@
+{
+  "ami": {
+    "host": "10.1.1.1",
+    "port": 5038,
+    "username": "tapi",
+    "secret": "change-me",
+
+    "tls": false,
+    "insecure_skip_verify": false,
+
+    "connect_timeout_sec": 10,
+    "action_timeout_sec": 15,
+    "keepalive_sec": 30,
+    "reconnect_min_sec": 2,
+    "reconnect_max_sec": 60,
+    "resync_sec": 60,
+    "event_filter": true
+  },
+
+  "tapi": {
+    "max_calls_per_line": 4
+  },
+
+  "dialplan": {
+    "context": "from-internal",
+    "priority": 1,
+    "originate_timeout_ms": 30000,
+
+    "number_rules": [
+      { "match": "[^0-9+*#]", "replace": "" },
+      { "match": "^\\+", "replace": "00" }
+    ]
+  },
+
+  "log": {
+    "file": "C:\\ProgramData\\AmiTSP\\ami-tsp.log",
+    "level": "info"
+  },
+
+  "discovery": {
+    "enabled": true,
+    "interval_sec": 300,
+    "initial_timeout_sec": 8,
+
+    "include": [],
+    "exclude": ["(?i)trunk", "(?i)gateway", "(?i)^gw", "(?i)provider"],
+    "require_aor": true,
+
+    "defaults": {
+      "answer_mode": "none",
+      "hold_mode": "none",
+      "answer_notify_headers": { "Event": "talk" }
+    }
+  },
+
+  "lines": [
+    {
+      "name": "Phone 1001",
+      "channel": "PJSIP/1001",
+      "extension": "1001",
+      "callerid_name": "Phone 1001",
+      "callerid_num": "1001",
+      "permanent_id": 1001,
+      "context": "DLPN_DialPlan1001",
+
+      "answer_mode": "pjsip-notify",
+      "answer_notify_headers": { "Event": "talk" },
+      "hold_mode": "pjsip-notify"
+    }
+  ]
+}
